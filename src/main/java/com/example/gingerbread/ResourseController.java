@@ -16,17 +16,18 @@ public class ResourseController {
     HBox hBox;
 
     @FXML
-    Pane resoursePane;
-
-    @FXML
     Button removeButton;
 
     @FXML
     void initialize() {
-        hBox.prefWidthProperty().bind(resoursePane.widthProperty());
-        hBox.prefHeightProperty().bind(resoursePane.heightProperty());
-        label.prefWidthProperty().bind(hBox.widthProperty().multiply(0.8));
+        label.prefWidthProperty().bind(hBox.widthProperty());
         label.prefHeightProperty().bind(hBox.heightProperty());
-        removeButton.prefWidthProperty().bind(hBox.prefWidthProperty().multiply(0.2));
+        removeButton.prefWidthProperty().bind(hBox.prefWidthProperty().multiply(0.05));
+    }
+
+    @FXML
+    void removeResourse() {
+        Pane pane = (Pane) hBox.getParent();
+        pane.getChildren().remove(hBox);
     }
 }

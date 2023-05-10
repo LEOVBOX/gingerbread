@@ -9,9 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 
@@ -38,14 +39,15 @@ public class HelloController {
     @FXML
     private Pane rightVertPane;
 
+
     @FXML
-    private ScrollPane scrollPane;
+    private Pane rightPane;
 
     @FXML
     public Pane resoursesVbox;
 
     @FXML
-    public Pane rightPane;
+    private ScrollPane scrollPane;
 
     private Scene scene;
 
@@ -53,17 +55,20 @@ public class HelloController {
     void initialize() {
         scene = new Scene(mainPane, 500, 500);
         SplitPane.setResizableWithParent(rightPane, true);
+        rightPane.prefWidthProperty().bind(mainPane.widthProperty());
+        rightPane.prefHeightProperty().bind(mainPane.heightProperty());
         SplitPane.setResizableWithParent(leftPane, true);
 
 
         rightVertPane.prefHeightProperty().bind(rightPane.heightProperty());
         rightVertPane.prefWidthProperty().bind(rightPane.widthProperty());
 
-        scrollPane.prefWidthProperty().bind(rightVertPane.widthProperty());
-        scrollPane.prefHeightProperty().bind(rightVertPane.heightProperty());
+        scrollPane.prefWidthProperty().bind(rightPane.widthProperty());
+        scrollPane.prefHeightProperty().bind(rightPane.heightProperty());
 
-        resoursesVbox.prefWidthProperty().bind(rightVertPane.widthProperty());
-        resoursesVbox.prefHeightProperty().bind(rightVertPane.heightProperty());
+        resoursesVbox.prefWidthProperty().bind(scrollPane.widthProperty());
+        resoursesVbox.prefHeightProperty().bind(scrollPane.heightProperty());
+
 
         labelBar.prefWidthProperty().bind(rightPane.widthProperty());
 
@@ -83,10 +88,9 @@ public class HelloController {
     @FXML
     void addResourse() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ResoursePane.fxml"));
-        Pane resoursePane = loader.load();
-        resoursePane.prefHeightProperty().bind(rightPane.widthProperty());
-        resoursePane.maxHeightProperty().bind(resoursesVbox.heightProperty().multiply(0.1));
-        resoursesVbox.getChildren().add(resoursePane);
-
+        HBox hBox = loader.load();
+        hBox.prefWidthProperty().bind(resoursesVbox.widthProperty());
+        hBox.prefHeightProperty().bind(resoursesVbox.heightProperty().multiply(0.1));
+        resoursesVbox.getChildren().add(hBox);
     }
 }

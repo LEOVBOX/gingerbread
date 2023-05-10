@@ -33,9 +33,9 @@
                         </Button>
                      </children>
                   </HBox>
-                  <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="347.0" prefWidth="508.0">
+                  <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="346.0" prefWidth="450.0">
                      <content>
-                        <VBox fx:id="resoursesVbox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="343.0" prefWidth="443.0" style="-fx-background-color: #b8b8b8;" />
+                        <VBox fx:id="resoursesVbox" prefHeight="344.0" prefWidth="450.0" style="-fx-background-color: #a1d4b9;" />
                      </content>
                   </ScrollPane>
                </children>
