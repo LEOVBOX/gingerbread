@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.control.Label?>
+<AnchorPane fx:id="resoursePane" prefHeight="85.0" prefWidth="600.0" style="-fx-background-color: #f0b1c9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gingerbread.ResourseController">
+   <children>
+      <HBox fx:id="hBox" prefHeight="93.0" prefWidth="601.0">
+         <children>
+            <Label fx:id="label" prefHeight="107.0" prefWidth="414.0" style="-fx-border-width: 4; -fx-background-color: transparent; -fx-border-color: #d4d5d6; -fx-border-radius: 6;" />
+            <Button fx:id="removeButton" mnemonicParsing="false" prefHeight="104.0" prefWidth="187.0" text="Remove" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
