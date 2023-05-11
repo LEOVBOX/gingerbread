@@ -3,16 +3,13 @@ package com.example.gingerbread;
 import javafx.beans.binding.DoubleBinding;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -85,12 +82,26 @@ public class HelloController {
 
     }
 
+    void showResouceWindow() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("resource-window.fxml"));
+        AnchorPane anchorPane = loader.load();
+        Scene resourceScene = new Scene(anchorPane, 400,200);
+        Stage stage = new Stage();
+        String css = getClass().getResource("resource_window.css").toExternalForm();
+        resourceScene.getStylesheets().add(css);
+        stage.setScene(resourceScene);
+        stage.setTitle("Resource");
+        stage.setResizable(false);
+        stage.show();
+    }
+
     @FXML
-    void addResourse() throws IOException {
+    void addResource() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ResoursePane.fxml"));
         HBox hBox = loader.load();
-        hBox.prefWidthProperty().bind(resoursesVbox.widthProperty());
+        hBox.prefWidthProperty().bind(resoursesVbox.widthProperty().subtract(10));
         hBox.prefHeightProperty().bind(resoursesVbox.heightProperty().multiply(0.1));
+        showResouceWindow();
         resoursesVbox.getChildren().add(hBox);
     }
 }
