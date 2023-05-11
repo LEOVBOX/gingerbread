@@ -58,11 +58,4 @@ public class Gingerbread {
         return null; // если объект не найден
     }
 
-    public static void main(String[] args) throws SQLException {
-        ArrayList<Resource> resources = loadResourses();
-        for (Resource res : resources) {
-            res.print();
-        }
-    }
-
 }

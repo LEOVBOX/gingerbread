@@ -1,6 +1,8 @@
 package com.example.gingerbread;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -8,6 +10,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ResourceController {
@@ -24,7 +27,7 @@ public class ResourceController {
     void initialize() {
         label.prefWidthProperty().bind(hBox.widthProperty());
         label.prefHeightProperty().bind(hBox.heightProperty());
-        removeButton.prefWidthProperty().bind(hBox.prefWidthProperty().multiply(0.05));
+        removeButton.prefWidthProperty().bind(hBox.prefWidthProperty());
         String css = getClass().getResource("resourece_Pane.css").toExternalForm();
         hBox.getStylesheets().add(css);
 
@@ -55,8 +58,13 @@ public class ResourceController {
     }
 
     @FXML
-    void removeResource() throws IOException {
+    void removeResource() throws IOException, SQLException {
         if (confirmDelete().get()) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+            Parent root = loader.load();
+            HelloController controller = loader.getController();
+            Resource delResourse = Gingerbread.getResourseByName(controller.resources, this.label.getText());
+            delResourse.deleteResource();
             Pane pane = (Pane) hBox.getParent();
             pane.getChildren().remove(hBox);
         }

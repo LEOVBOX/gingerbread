@@ -3,6 +3,7 @@ package com.example.gingerbread;
 import javafx.beans.binding.DoubleBinding;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,6 +13,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class HelloController {
 
@@ -48,8 +50,10 @@ public class HelloController {
 
     private Scene scene;
 
+    public ArrayList<Resource> resources;
+
     @FXML
-    void initialize() {
+    void initialize() throws IOException {
         scene = new Scene(mainPane, 500, 500);
         SplitPane.setResizableWithParent(rightPane, true);
         rightPane.prefWidthProperty().bind(mainPane.widthProperty());
@@ -80,6 +84,11 @@ public class HelloController {
 
         mainPane.prefWidthProperty().bind(scene.widthProperty());
 
+        resources = Gingerbread.loadResourses();
+        for (Resource res: resources) {
+            addResourse(res.name);
+            res.print();
+        }
     }
 
     void showResouceWindow() throws IOException{
@@ -95,11 +104,20 @@ public class HelloController {
         stage.show();
     }
 
-    @FXML
-    void addResource() throws IOException {
+    public void addResourse(String title) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ResoursePane.fxml"));
         HBox hBox = loader.load();
-        hBox.prefWidthProperty().bind(resoursesVbox.widthProperty().subtract(10));
+        hBox.prefWidthProperty().bind(resoursesVbox.widthProperty());
+        hBox.prefHeightProperty().bind(resoursesVbox.heightProperty().multiply(0.1));
+        Label label = (Label) hBox.lookup("#label");
+        label.setText(title);
+        resoursesVbox.getChildren().add(hBox);
+    }
+    @FXML
+    void addResourceVoid() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ResoursePane.fxml"));
+        HBox hBox = loader.load();
+        hBox.prefWidthProperty().bind(resoursesVbox.widthProperty());
         hBox.prefHeightProperty().bind(resoursesVbox.heightProperty().multiply(0.1));
         showResouceWindow();
         resoursesVbox.getChildren().add(hBox);

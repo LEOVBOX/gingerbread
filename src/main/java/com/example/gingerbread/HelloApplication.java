@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class HelloApplication extends Application {
     @Override
@@ -23,8 +24,7 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) throws SQLException {
-        Gingerbread.main(null);
+    public static void main(String[] args) throws SQLException, IOException {
         launch();
     }
 }

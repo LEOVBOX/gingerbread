@@ -15,12 +15,12 @@
 }
 
 #label {
+    -fx-border-radius: 24px;
     fx-font-family: "Roboto", sans-serif;
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.2) , 2,0,0,1 );
 }
 
 #label:hover {
-    -fx-background-color: rgba(214, 214, 214, 1);
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.4) , 4,0,0,2 );
 }
 
