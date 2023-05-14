@@ -10,7 +10,7 @@
 
 <HBox fx:id="hBox" minHeight="60.0" prefHeight="93.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gingerbread.ResourceController">
    <children>
-      <Label fx:id="label" prefHeight="107.0" prefWidth="414.0" style="-fx-border-width: 3; -fx-border-color: #d4d5d6; -fx-border-radius: 6;">
+      <Label fx:id="label" onMouseClicked="#changeResource" prefHeight="107.0" prefWidth="414.0" style="-fx-border-width: 3; -fx-border-color: #d4d5d6; -fx-border-radius: 6;">
          <font>
             <Font size="20.0" />
          </font>

@@ -5,8 +5,7 @@ import java.util.ArrayList;
 
 public class Gingerbread {
     public static ArrayList<Resource> loadResourses() {
-        Connection connection = null;
-        ResultSet rs = null;
+        Connection connection;
         ArrayList<Resource> result = new ArrayList<>();
 
         try {
@@ -49,7 +48,8 @@ public class Gingerbread {
         }
     }
 
-    public static Resource getResourseByName(ArrayList<Resource> resources, String name) {
+    public static Resource getResourseByName(String name) {
+        ArrayList<Resource> resources = loadResourses();
         for (Resource resource : resources) {
             if (resource.name.equals(name)) {
                 return resource;

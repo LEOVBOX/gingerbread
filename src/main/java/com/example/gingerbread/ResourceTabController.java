@@ -96,7 +96,7 @@ public class ResourceTabController {
     }
 
     public void addResourse(Resource resource) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ResoursePane.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("resource-pane.fxml"));
         HBox hBox = loader.load();
         hBox.prefWidthProperty().bind(resoursesVbox.widthProperty());
         hBox.prefHeightProperty().bind(resoursesVbox.heightProperty().multiply(0.1));
@@ -105,24 +105,13 @@ public class ResourceTabController {
         resoursesVbox.getChildren().add(hBox);
     }
 
-    void showResouceWindow(Parent resChangeWindow) throws IOException{
-        Scene resourceScene = resChangeWindow.getScene();
-        Stage stage = new Stage();
-        String css = getClass().getResource("resource_window.css").toExternalForm();
-        resourceScene.getStylesheets().add(css);
-        stage.setScene(resourceScene);
-        stage.setTitle("Resource");
-        stage.setResizable(false);
-        stage.show();
-
-    }
     @FXML
     void addNewResource() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("resource-window.fxml"));
         Resource newRes = new Resource();
         Parent resChangeWindow = loader.load();
         ResourceWindowController controller = loader.getController();
-        controller.setMainController(this);
-        showResouceWindow(resChangeWindow);
+        controller.setTabController(this);
+        controller.showResouceWindow(resChangeWindow, null);
     }
 }

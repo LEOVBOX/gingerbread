@@ -64,11 +64,24 @@ public class ResourceController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
             loader.load();
             ResourceTabController controller = loader.getController();
-            Resource delResourse = Gingerbread.getResourseByName(controller.resources, this.label.getText());
+            Resource delResourse = Gingerbread.getResourseByName(this.label.getText());
             delResourse.deleteResource();
             Pane pane = (Pane) hBox.getParent();
             pane.getChildren().remove(hBox);
         }
+    }
+
+    @FXML
+    void changeResource() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("resource-window.fxml"));
+        Parent resChangeWindow = loader.load();
+        ResourceWindowController controller = loader.getController();
+        controller.setResourceController(this);
+        controller.showResouceWindow(resChangeWindow, label.getText());
+    }
+
+    void saveChanges(String newLabel) {
+        label.setText(newLabel);
     }
 
 }

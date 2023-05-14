@@ -116,6 +116,15 @@ public class Resource {
                 preparedStatement.close();
             }
             else {
+                preparedStatement = connection.prepareStatement(
+                        "UPDATE resourses SET name = ?, count = ?, units = ? WHERE id = ?"
+                );
+                preparedStatement.setInt(4, id);
+                preparedStatement.setString(1, name);
+                preparedStatement.setInt(2, count);
+                preparedStatement.setString(3, units);
+                preparedStatement.executeUpdate();
+                preparedStatement.close();
                 System.out.println("This is not new object");
             }
 
