@@ -3,19 +3,16 @@ package com.example.gingerbread;
 import javafx.beans.binding.DoubleBinding;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.SplitPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class HelloController {
+public class ResourceTabController {
 
     @FXML
     private Label resourseLabel;
@@ -49,6 +46,9 @@ public class HelloController {
     private ScrollPane scrollPane;
 
     private Scene scene;
+
+
+
 
     public ArrayList<Resource> resources;
 
@@ -85,16 +85,28 @@ public class HelloController {
         mainPane.prefWidthProperty().bind(scene.widthProperty());
 
         resources = Gingerbread.loadResourses();
+        System.out.println("Init resource tab");
         for (Resource res: resources) {
-            addResourse(res.name);
+            addResourse(res);
             res.print();
         }
+
+
+
     }
 
-    void showResouceWindow() throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("resource-window.fxml"));
-        AnchorPane anchorPane = loader.load();
-        Scene resourceScene = new Scene(anchorPane, 400,200);
+    public void addResourse(Resource resource) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ResoursePane.fxml"));
+        HBox hBox = loader.load();
+        hBox.prefWidthProperty().bind(resoursesVbox.widthProperty());
+        hBox.prefHeightProperty().bind(resoursesVbox.heightProperty().multiply(0.1));
+        Label label = (Label) hBox.lookup("#label");
+        label.setText(resource.name);
+        resoursesVbox.getChildren().add(hBox);
+    }
+
+    void showResouceWindow(Parent resChangeWindow) throws IOException{
+        Scene resourceScene = resChangeWindow.getScene();
         Stage stage = new Stage();
         String css = getClass().getResource("resource_window.css").toExternalForm();
         resourceScene.getStylesheets().add(css);
@@ -102,24 +114,15 @@ public class HelloController {
         stage.setTitle("Resource");
         stage.setResizable(false);
         stage.show();
-    }
 
-    public void addResourse(String title) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ResoursePane.fxml"));
-        HBox hBox = loader.load();
-        hBox.prefWidthProperty().bind(resoursesVbox.widthProperty());
-        hBox.prefHeightProperty().bind(resoursesVbox.heightProperty().multiply(0.1));
-        Label label = (Label) hBox.lookup("#label");
-        label.setText(title);
-        resoursesVbox.getChildren().add(hBox);
     }
     @FXML
-    void addResourceVoid() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ResoursePane.fxml"));
-        HBox hBox = loader.load();
-        hBox.prefWidthProperty().bind(resoursesVbox.widthProperty());
-        hBox.prefHeightProperty().bind(resoursesVbox.heightProperty().multiply(0.1));
-        showResouceWindow();
-        resoursesVbox.getChildren().add(hBox);
+    void addNewResource() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("resource-window.fxml"));
+        Resource newRes = new Resource();
+        Parent resChangeWindow = loader.load();
+        ResourceWindowController controller = loader.getController();
+        controller.setMainController(this);
+        showResouceWindow(resChangeWindow);
     }
 }

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane fx:id="mainPane" dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gingerbread.HelloController">
+<SplitPane fx:id="mainPane" dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gingerbread.ResourceTabController">
   <items>
     <AnchorPane fx:id="leftPane" minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="55.0" SplitPane.resizableWithParent="false">
          <children>
@@ -20,7 +20,7 @@
          <children>
             <VBox fx:id="rightVertPane" prefHeight="399.0" prefWidth="446.0">
                <children>
-                  <HBox fx:id="labelBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+                  <HBox fx:id="labelBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #b1f0f0;">
                      <children>
                         <Label fx:id="resourseLabel" prefHeight="51.0" prefWidth="363.0" style="-fx-background-color: #e6e6e6;" text="Resourses">
                            <font>
@@ -30,7 +30,7 @@
                               <Insets left="10.0" />
                            </padding>
                         </Label>
-                        <Button fx:id="addButton" mnemonicParsing="false" onAction="#addResourceVoid" prefHeight="53.0" prefWidth="87.0" text="+">
+                        <Button fx:id="addButton" mnemonicParsing="false" onAction="#addNewResource" prefHeight="53.0" prefWidth="87.0" text="+">
                            <font>
                               <Font size="26.0" />
                            </font>

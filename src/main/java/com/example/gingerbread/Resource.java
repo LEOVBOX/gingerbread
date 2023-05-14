@@ -36,6 +36,10 @@ public class Resource {
         id = -1;
     }
 
+    Resource() {
+        id = -1;
+    }
+
     Resource(int id) {
         this.id = id;
     }

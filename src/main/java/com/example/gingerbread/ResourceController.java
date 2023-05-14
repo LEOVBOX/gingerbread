@@ -23,6 +23,8 @@ public class ResourceController {
     @FXML
     Button removeButton;
 
+
+
     @FXML
     void initialize() {
         label.prefWidthProperty().bind(hBox.widthProperty());
@@ -34,10 +36,9 @@ public class ResourceController {
     }
 
     AtomicBoolean confirmDelete() throws IOException {
-
         Dialog<ButtonType> confirmDialog = new Dialog<>();
         confirmDialog.setTitle("Подтверждение удаления resourse");
-        Pane dialogPane = confirmDialog.getDialogPane();
+
         // добавление кнопок
         ButtonType okButtonType = new ButtonType("Да", ButtonBar.ButtonData.OK_DONE);
         confirmDialog.getDialogPane().getButtonTypes().addAll(okButtonType, ButtonType.CANCEL);
@@ -61,12 +62,13 @@ public class ResourceController {
     void removeResource() throws IOException, SQLException {
         if (confirmDelete().get()) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
-            Parent root = loader.load();
-            HelloController controller = loader.getController();
+            loader.load();
+            ResourceTabController controller = loader.getController();
             Resource delResourse = Gingerbread.getResourseByName(controller.resources, this.label.getText());
             delResourse.deleteResource();
             Pane pane = (Pane) hBox.getParent();
             pane.getChildren().remove(hBox);
         }
     }
+
 }
