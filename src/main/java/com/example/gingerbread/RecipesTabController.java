@@ -2,17 +2,16 @@ package com.example.gingerbread;
 
 import javafx.beans.binding.DoubleBinding;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SplitPane;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-public class ResourceTabController {
+public class RecipesTabController {
 
     @FXML
     private Label resourseLabel;
@@ -59,8 +58,6 @@ public class ResourceTabController {
     private HelloApplication application;
 
 
-    public ArrayList<Resource> resources;
-
     @FXML
     void initialize() throws IOException {
         scene = new Scene(mainPane, 500, 500);
@@ -97,12 +94,6 @@ public class ResourceTabController {
 
         mainPane.prefWidthProperty().bind(scene.widthProperty());
 
-        resources = Gingerbread.loadResourses();
-        System.out.println("Init resource tab");
-        for (Resource res: resources) {
-            addResourse(res);
-            res.print();
-        }
 
     }
 
@@ -110,28 +101,10 @@ public class ResourceTabController {
         this.application = application;
     }
 
-    public void addResourse(Resource resource) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("resource-pane.fxml"));
-        HBox hBox = loader.load();
-        hBox.prefWidthProperty().bind(resoursesVbox.widthProperty());
-        hBox.prefHeightProperty().bind(resoursesVbox.heightProperty().multiply(0.1));
-        Label label = (Label) hBox.lookup("#label");
-        label.setText(resource.name);
-        resoursesVbox.getChildren().add(hBox);
+    @FXML
+    void showResourcesTab() throws IOException {
+        application.showResourcesTab();
     }
 
-    @FXML
-    void addNewResource() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("resource-window.fxml"));
-        Resource newRes = new Resource();
-        Parent resChangeWindow = loader.load();
-        ResourceWindowController controller = loader.getController();
-        controller.setTabController(this);
-        controller.showResouceWindow(resChangeWindow, null);
-    }
 
-    @FXML
-    void openRecipesTab() throws IOException {
-        application.showRecepiesTab();
-    }
 }

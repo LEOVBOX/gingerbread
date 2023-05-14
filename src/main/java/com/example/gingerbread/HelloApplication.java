@@ -14,15 +14,41 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class HelloApplication extends Application {
+
+    Stage mainStage;
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Parent root = fxmlLoader.load();
-        Scene scene = root.getScene();
-        stage.setTitle("Gingerbread");
-        stage.setScene(scene);
-        stage.show();
+        mainStage = stage;
+        showResourcesTab();
     }
+
+    public void showResourcesTab() throws IOException {
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("resources-tab.fxml"));
+        Parent root = loader.load();
+        ResourceTabController controller = loader.getController();
+        controller.setApplication(this);
+        Scene scene = root.getScene();
+        String css = getClass().getResource("resources-stage.css").toExternalForm();
+        root.getStylesheets().add(css);
+        mainStage.setTitle("Gingerbread");
+        mainStage.setScene(scene);
+        mainStage.show();
+    }
+
+    public void showRecepiesTab() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("recipes-tab.fxml"));
+        Parent root = fxmlLoader.load();
+        RecipesTabController controller = fxmlLoader.getController();
+        controller.setApplication(this);
+        Scene scene = root.getScene();
+        String css = getClass().getResource("resources-stage.css").toExternalForm();
+        root.getStylesheets().add(css);
+        mainStage.setTitle("Gingerbread");
+        mainStage.setScene(scene);
+        mainStage.show();
+    }
+
+
 
     public static void main(String[] args) throws SQLException, IOException {
         launch();

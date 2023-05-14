@@ -14,7 +14,24 @@
   <items>
     <AnchorPane fx:id="leftPane" minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="55.0" SplitPane.resizableWithParent="false">
          <children>
-            <VBox fx:id="sideBar" prefHeight="399.0" prefWidth="146.0" style="-fx-background-color: #f0d4b1;" />
+            <VBox fx:id="sideBar" prefHeight="399.0" prefWidth="146.0" style="-fx-background-color: #f0d4b1;">
+               <children>
+                  <Label fx:id="resourcesTab" prefHeight="45.0" prefWidth="156.0" text="Ресурсы">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="recipesTab" onMouseClicked="#openRecipesTab" prefHeight="45.0" prefWidth="156.0" text="Рецепты">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="ordersTab" prefHeight="45.0" prefWidth="156.0" text="Заказы">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children></VBox>
          </children></AnchorPane>
     <AnchorPane fx:id="rightPane" minHeight="0.0" minWidth="0.0" SplitPane.resizableWithParent="false">
          <children>
@@ -22,7 +39,7 @@
                <children>
                   <HBox fx:id="labelBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #b1f0f0;">
                      <children>
-                        <Label fx:id="resourseLabel" prefHeight="51.0" prefWidth="363.0" style="-fx-background-color: #e6e6e6;" text="Resourses">
+                        <Label fx:id="resourseLabel" prefHeight="51.0" prefWidth="363.0" style="-fx-background-color: #e6e6e6;" text="Ресурсы">
                            <font>
                               <Font size="27.0" />
                            </font>

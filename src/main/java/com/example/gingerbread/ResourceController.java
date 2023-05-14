@@ -61,7 +61,7 @@ public class ResourceController {
     @FXML
     void removeResource() throws IOException, SQLException {
         if (confirmDelete().get()) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("resources-tab.fxml"));
             loader.load();
             ResourceTabController controller = loader.getController();
             Resource delResourse = Gingerbread.getResourseByName(this.label.getText());

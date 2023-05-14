@@ -3,12 +3,14 @@ package com.example.gingerbread;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ResourceWindowController {
 
@@ -57,7 +59,27 @@ public class ResourceWindowController {
         }
         resource.name = nameText.getText();
         resource.units = unitsText.getText();
-        resource.count = Integer.parseInt(countText.getText());
+        try {
+            int count = Integer.parseInt(countText.getText());
+            resource.count = count;
+        }
+        catch (Exception e) {
+            Dialog<ButtonType> errorDialog = new Dialog<>();
+            errorDialog.setTitle("Ошибка");
+
+            // добавление кнопок
+            ButtonType closeButtonType = new ButtonType("закрыть", ButtonBar.ButtonData.CANCEL_CLOSE);
+            errorDialog.getDialogPane().getButtonTypes().addAll(closeButtonType);
+
+            // установка контента диалогового окна
+            StackPane content = new StackPane();
+            content.getChildren().add(new Text("Вы не ввели количество ресурса. Можете исправить это редактированием"));
+            errorDialog.getDialogPane().setContent(content);
+
+            // показ диалогового окна и ожидание закрытия
+            errorDialog.showAndWait();
+        }
+
         resource.save();
         Stage stage = (Stage) mainPane.getScene().getWindow();
         stage.close();

@@ -1,0 +1,43 @@
+#resourcesTab {
+    -fx-background-color: #d9a76f;
+    -fx-text-fill: #fff;
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-font-size: 24px;
+    -fx-border-radius: 24px;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.2) , 2,0,0,1 );
+}
+
+#resourcesTab:hover {
+    -fx-background-color: #d9b58d;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.4) , 4,0,0,2 );
+}
+
+#recipesTab {
+    fx-background-color: #d9a76f;
+    -fx-text-fill: #fff;
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-font-size: 24px;
+    -fx-border-radius: 24px;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.2) , 2,0,0,1 );
+}
+
+#recipesTab:hover {
+    -fx-background-color: #d9b58d;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.4) , 4,0,0,2 );
+}
+
+#ordersTab {
+    fx-background-color: #d9a76f;
+    -fx-text-fill: #fff;
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-font-size: 24px;
+    -fx-border-radius: 24px;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.2) , 2,0,0,1 );
+}
+
+#ordersTab:hover {
+    -fx-background-color: #d9b58d;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.4) , 4,0,0,2 );
+}
+
+
