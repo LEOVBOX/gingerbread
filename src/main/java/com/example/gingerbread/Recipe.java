@@ -13,6 +13,8 @@ public class Recipe {
         this.id = id;
     }
 
+    public Recipe(String name) {this.name = name;}
+
     public String getName() {
         return name;
     }
@@ -96,6 +98,24 @@ public class Recipe {
         }
         catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void deleteRecipe() throws SQLException {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        try {
+            conn = DriverManager.getConnection("jdbc:sqlite:/Users/leonid/IdeaProjects/gingerbread/database.sqlite");
+            pstmt = conn.prepareStatement("DELETE FROM main.recipes WHERE id = ?");
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+        } finally {
+            if (pstmt != null) {
+                pstmt.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
     }
 

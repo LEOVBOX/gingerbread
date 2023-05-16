@@ -58,7 +58,7 @@ public class RecipesTabController {
 
     private Scene scene;
 
-    private HelloApplication application;
+    private Application application;
 
     private ArrayList<Recipe> recipes;
 
@@ -108,7 +108,7 @@ public class RecipesTabController {
 
     }
 
-    public void setApplication(HelloApplication application) {
+    public void setApplication(Application application) {
         this.application = application;
     }
 
@@ -121,7 +121,7 @@ public class RecipesTabController {
 
     @FXML
     public void addRecipe(Recipe recipe) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("resource-pane.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("recipe-pane.fxml"));
         HBox hBox = loader.load();
         hBox.prefWidthProperty().bind(resoursesVbox.widthProperty());
         hBox.prefHeightProperty().bind(resoursesVbox.heightProperty().multiply(0.1));

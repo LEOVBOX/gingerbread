@@ -41,6 +41,16 @@ public class Gingerbread {
         return null; // если объект не найден
     }
 
+    public static Recipe getRecipeByName(String name) {
+        ArrayList<Recipe> recipes = loadRecipes();
+        for (Recipe recipe : recipes) {
+            if (recipe.getName().equals(name)) {
+                return recipe;
+            }
+        }
+        return null; // если объект не найден
+    }
+
 
     public static ArrayList<Recipe> loadRecipes() {
         Connection connection;

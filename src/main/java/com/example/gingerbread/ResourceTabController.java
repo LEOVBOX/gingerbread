@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -56,7 +55,7 @@ public class ResourceTabController {
 
     private Scene scene;
 
-    private HelloApplication application;
+    private Application application;
 
 
     public ArrayList<Resource> resources;
@@ -106,7 +105,7 @@ public class ResourceTabController {
 
     }
 
-    public void setApplication(HelloApplication application) {
+    public void setApplication(Application application) {
         this.application = application;
     }
 
