@@ -120,6 +120,8 @@ public class ResourceTabController {
         resoursesVbox.getChildren().add(hBox);
     }
 
+
+
     @FXML
     void addNewResource() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("resource-window.fxml"));

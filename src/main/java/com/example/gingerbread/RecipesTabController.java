@@ -2,14 +2,17 @@ package com.example.gingerbread;
 
 import javafx.beans.binding.DoubleBinding;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class RecipesTabController {
 
@@ -57,6 +60,8 @@ public class RecipesTabController {
 
     private HelloApplication application;
 
+    private ArrayList<Recipe> recipes;
+
 
     @FXML
     void initialize() throws IOException {
@@ -94,6 +99,12 @@ public class RecipesTabController {
 
         mainPane.prefWidthProperty().bind(scene.widthProperty());
 
+        recipes = Gingerbread.loadRecipes();
+        System.out.println("Init resource tab");
+        for (Recipe recipe: recipes) {
+            addRecipe(recipe);
+            recipe.print();
+        }
 
     }
 
@@ -105,6 +116,21 @@ public class RecipesTabController {
     void showResourcesTab() throws IOException {
         application.showResourcesTab();
     }
+
+
+
+    @FXML
+    public void addRecipe(Recipe recipe) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("resource-pane.fxml"));
+        HBox hBox = loader.load();
+        hBox.prefWidthProperty().bind(resoursesVbox.widthProperty());
+        hBox.prefHeightProperty().bind(resoursesVbox.heightProperty().multiply(0.1));
+        Label label = (Label) hBox.lookup("#label");
+        label.setText(recipe.getName());
+        resoursesVbox.getChildren().add(hBox);
+    }
+
+
 
 
 }
