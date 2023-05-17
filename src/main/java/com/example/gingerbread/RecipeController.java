@@ -71,14 +71,15 @@ public class RecipeController {
         }
     }
 
-    /*@FXML
-    void changeResource() throws IOException {
+    @FXML
+    void openRecipeWindow() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("recipe-window.fxml"));
         Parent resChangeWindow = loader.load();
-        ResourceWindowController controller = loader.getController();
+        RecipeWindowController controller = loader.getController();
         controller.setResourceController(this);
-        controller.showResouceWindow(resChangeWindow, label.getText());
-    }*/
+        controller.showRecipeWindow(resChangeWindow, label.getText());
+    }
+
 
     void saveChanges(String newLabel) {
         label.setText(newLabel);

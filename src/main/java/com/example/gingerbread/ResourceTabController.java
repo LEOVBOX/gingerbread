@@ -62,7 +62,7 @@ public class ResourceTabController {
 
     @FXML
     void initialize() throws IOException {
-        scene = new Scene(mainPane, 500, 500);
+        scene = new Scene(mainPane, 700, 700);
         SplitPane.setResizableWithParent(rightPane, true);
         rightPane.prefWidthProperty().bind(mainPane.widthProperty());
         rightPane.prefHeightProperty().bind(mainPane.heightProperty());
@@ -96,7 +96,7 @@ public class ResourceTabController {
 
         mainPane.prefWidthProperty().bind(scene.widthProperty());
 
-        resources = Gingerbread.loadResourses();
+        resources = Gingerbread.loadResources("resources");
         System.out.println("Init resource tab");
         for (Resource res: resources) {
             addResourse(res);
@@ -112,14 +112,18 @@ public class ResourceTabController {
     public void addResourse(Resource resource) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("resource-pane.fxml"));
         HBox hBox = loader.load();
+        ResourceController controller = loader.getController();
+        controller.setResourceTabController(this);
         hBox.prefWidthProperty().bind(resoursesVbox.widthProperty());
         hBox.prefHeightProperty().bind(resoursesVbox.heightProperty().multiply(0.1));
         Label label = (Label) hBox.lookup("#label");
+        Label countLabel = (Label) hBox.lookup("#countLabel");
+        Label unitsLabel = (Label) hBox.lookup("#unitsLabel") ;
+        countLabel.setText(Integer.toString(resource.count));
+        unitsLabel.setText(resource.units);
         label.setText(resource.name);
         resoursesVbox.getChildren().add(hBox);
     }
-
-
 
     @FXML
     void addNewResource() throws IOException {
@@ -128,7 +132,7 @@ public class ResourceTabController {
         Parent resChangeWindow = loader.load();
         ResourceWindowController controller = loader.getController();
         controller.setTabController(this);
-        controller.showResouceWindow(resChangeWindow, null);
+        controller.showResourceWindow(resChangeWindow, null, "resources");
     }
 
     @FXML

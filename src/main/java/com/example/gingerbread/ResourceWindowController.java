@@ -10,7 +10,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ResourceWindowController {
 
@@ -37,6 +36,10 @@ public class ResourceWindowController {
     private ResourceTabController tabController;
     private ResourceController resourceController;
 
+    private RecipeWindowController recipeWindowController;
+
+    private String tableName;
+
     void setTabController(ResourceTabController resourceTabController) {
         this.tabController = resourceTabController;
     }
@@ -44,6 +47,9 @@ public class ResourceWindowController {
     void setResourceController(ResourceController resourceController) {
         this.resourceController = resourceController;
     }
+
+    void setRecipeWindowController(RecipeWindowController controller) {this.recipeWindowController = controller;}
+
 
 
     @FXML
@@ -80,16 +86,17 @@ public class ResourceWindowController {
             errorDialog.showAndWait();
         }
 
-        resource.save();
+        resource.save(tableName);
         Stage stage = (Stage) mainPane.getScene().getWindow();
         stage.close();
-        if (tabController != null)
-        {
+        if (tabController != null) {
             tabController.addResourse(resource);
         }
-        if (resourceController != null)
-        {
-            resourceController.saveChanges(resource.name);
+        else if (recipeWindowController != null) {
+            recipeWindowController.addResource(resource);
+        }
+        else if (resourceController != null) {
+            resourceController.saveChanges(resource.name, Integer.toString(resource.count), resource.units);
         }
     }
 
@@ -98,12 +105,13 @@ public class ResourceWindowController {
         resourceStage.close();
     }
 
-    void showResouceWindow(Parent resChangeWindow, String name) throws IOException{
+    void showResourceWindow(Parent resChangeWindow, String name, String tableName) throws IOException{
+        this.tableName = tableName;
         resourceScene = resChangeWindow.getScene();
         resourceStage = new Stage();
         String css = getClass().getResource("resource_window.css").toExternalForm();
         if (name != null) {
-            resource = Gingerbread.getResourseByName(name) ;
+            resource = Gingerbread.getResourceByName(name, "resources") ;
             if (resource != null)
             {
                 nameText.setText(name);

@@ -4,14 +4,15 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Gingerbread {
-    public static ArrayList<Resource> loadResourses() {
+    public static ArrayList<Resource> loadResources(String tableName) {
         Connection connection;
         ArrayList<Resource> result = new ArrayList<>();
 
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:/Users/leonid/IdeaProjects/gingerbread/database.sqlite");
             Statement statement = connection.createStatement();
-            String query = "SELECT id FROM main.resources";
+            statement.execute("CREATE TABLE IF NOT EXISTS " + tableName + " (id INTEGER PRIMARY KEY, name TEXT, count INTEGER, units TEXT)");
+            String query = "SELECT id FROM " + tableName;
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
@@ -21,7 +22,7 @@ public class Gingerbread {
             resultSet.close();
             connection.close();
             for (Resource resource : result) {
-                resource.load();
+                resource.load(tableName);
             }
         }
         catch (Exception e) {
@@ -31,8 +32,8 @@ public class Gingerbread {
     }
 
 
-    public static Resource getResourseByName(String name) {
-        ArrayList<Resource> resources = loadResourses();
+    public static Resource getResourceByName(String name, String tableName) {
+        ArrayList<Resource> resources = loadResources(tableName);
         for (Resource resource : resources) {
             if (resource.name.equals(name)) {
                 return resource;

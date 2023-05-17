@@ -23,11 +23,30 @@ public class ResourceController {
     @FXML
     Button removeButton;
 
+    @FXML
+    Label countLabel;
+
+    @FXML
+    Label unitsLabel;
+
+    private ResourceTabController resourceTabController;
+    private RecipeWindowController recipeWindowController;
+
+    public void setResourceTabController(ResourceTabController controller) {
+        resourceTabController = controller;
+    }
+
+    public void setRecipeWindowController(RecipeWindowController controller) {
+        recipeWindowController = controller;
+    }
+
 
 
     @FXML
     void initialize() {
-        label.prefWidthProperty().bind(hBox.widthProperty());
+        countLabel.prefWidthProperty().bind(hBox.prefWidthProperty().multiply(0.2));
+        unitsLabel.prefWidthProperty().bind(hBox.prefWidthProperty().multiply(0.2));
+        label.prefWidthProperty().bind(hBox.widthProperty().multiply(0.6));
         label.prefHeightProperty().bind(hBox.heightProperty());
         removeButton.prefWidthProperty().bind(hBox.prefWidthProperty());
         String css = getClass().getResource("resourece_Pane.css").toExternalForm();
@@ -61,11 +80,20 @@ public class ResourceController {
     @FXML
     void removeResource() throws IOException, SQLException {
         if (confirmDelete().get()) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("resources-tab.fxml"));
-            loader.load();
-            ResourceTabController controller = loader.getController();
-            Resource delResourse = Gingerbread.getResourseByName(this.label.getText());
-            delResourse.deleteResource();
+            Resource delResource = null;
+            if (resourceTabController != null) {
+//                FXMLLoader loader = new FXMLLoader(getClass().getResource("resources-tab.fxml"));
+//                loader.load();
+                delResource = Gingerbread.getResourceByName(this.label.getText(), "resources");
+                delResource.deleteResource("resources");
+            }
+            else if(recipeWindowController != null) {
+                delResource = Gingerbread.getResourceByName(
+                        this.label.getText(), recipeWindowController.getRecipeName() + "Recipe_resources");
+                delResource.deleteResource(recipeWindowController.getRecipeName() + "Recipe_resources");
+            }
+
+
             Pane pane = (Pane) hBox.getParent();
             pane.getChildren().remove(hBox);
         }
@@ -77,11 +105,20 @@ public class ResourceController {
         Parent resChangeWindow = loader.load();
         ResourceWindowController controller = loader.getController();
         controller.setResourceController(this);
-        controller.showResouceWindow(resChangeWindow, label.getText());
+        String tableName = null;
+        if (recipeWindowController == null) {
+            tableName = "resources";
+        }
+        else {
+            tableName = recipeWindowController.getRecipeName() + "Resources";
+        }
+        controller.showResourceWindow(resChangeWindow, label.getText(), tableName);
     }
 
-    void saveChanges(String newLabel) {
-        label.setText(newLabel);
+    void saveChanges(String name, String count, String units) {
+        label.setText(name);
+        countLabel.setText(count);
+        unitsLabel.setText(units);
     }
 
 }

@@ -9,6 +9,9 @@ public class Recipe {
     private String description;
     private String imagePath;
 
+    public Recipe() {
+        this.id = -1;
+    }
     public Recipe(int id) {
         this.id = id;
     }
@@ -17,6 +20,15 @@ public class Recipe {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getDescription() {return description;}
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void load() {
@@ -108,6 +120,8 @@ public class Recipe {
             conn = DriverManager.getConnection("jdbc:sqlite:/Users/leonid/IdeaProjects/gingerbread/database.sqlite");
             pstmt = conn.prepareStatement("DELETE FROM main.recipes WHERE id = ?");
             pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+            pstmt = conn.prepareStatement("DROP TABLE IF EXISTS " + name + "_RecipeResources");
             pstmt.executeUpdate();
         } finally {
             if (pstmt != null) {

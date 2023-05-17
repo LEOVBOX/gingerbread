@@ -50,11 +50,8 @@ public class Resource {
 
 
 
-    public void save() {
+    public void save(String tableName) {
         Connection connection = null;
-        if (id == -1) {
-            id = Gingerbread.setId("resources");
-        }
         try {
             // Loading the driver
             Class.forName("org.sqlite.JDBC");
@@ -63,15 +60,19 @@ public class Resource {
             connection = DriverManager.getConnection("jdbc:sqlite:/Users/leonid/IdeaProjects/gingerbread/database.sqlite");
             Statement statement = connection.createStatement();
 
-            statement.execute("CREATE TABLE IF NOT EXISTS resources (id INTEGER PRIMARY KEY, name TEXT, count INTEGER, units TEXT)");
+            statement.execute("CREATE TABLE IF NOT EXISTS " + tableName + " (id INTEGER PRIMARY KEY, name TEXT, count INTEGER, units TEXT)");
+
+            if (id == -1) {
+                id = Gingerbread.setId(tableName);
+            }
 
             // Insert a new object to the table
             PreparedStatement preparedStatement;
             System.out.println("Name: " + this.name + " id = " + this.id + " saving");
 
-            if (!Gingerbread.isIdExists(id, "resources")) {
+            if (!Gingerbread.isIdExists(id, tableName)) {
                 preparedStatement = connection.prepareStatement(
-                        "INSERT INTO resources (id, name, count, units) VALUES (?, ?, ?, ?)");
+                        "INSERT INTO " + tableName + " (id, name, count, units) VALUES (?, ?, ?, ?)");
                 preparedStatement.setInt(1, id);
                 preparedStatement.setString(2, name);
                 preparedStatement.setInt(3, count);
@@ -83,7 +84,7 @@ public class Resource {
             }
             else {
                 preparedStatement = connection.prepareStatement(
-                        "UPDATE resources SET name = ?, count = ?, units = ? WHERE id = ?"
+                        "UPDATE " + tableName + " SET name = ?, count = ?, units = ? WHERE id = ?"
                 );
                 preparedStatement.setInt(4, id);
                 preparedStatement.setString(1, name);
@@ -102,13 +103,14 @@ public class Resource {
         }
     }
 
-    public void load() {
+    public void load(String tableName) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:/Users/leonid/IdeaProjects/gingerbread/database.sqlite");
-            pstmt = conn.prepareStatement("SELECT * FROM main.resources WHERE id = ?");
+            String query = "SELECT * FROM " + tableName + " WHERE id = ?";
+            pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
 
@@ -132,12 +134,12 @@ public class Resource {
 
     }
 
-    public void deleteResource() throws SQLException {
+    public void deleteResource(String tableName) throws SQLException {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:/Users/leonid/IdeaProjects/gingerbread/database.sqlite");
-            pstmt = conn.prepareStatement("DELETE FROM main.resources WHERE id = ?");
+            pstmt = conn.prepareStatement("DELETE FROM " + tableName + " WHERE id = ?");
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
         } finally {

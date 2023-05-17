@@ -3,6 +3,7 @@ package com.example.gingerbread;
 import javafx.beans.binding.DoubleBinding;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 public class RecipesTabController {
 
     @FXML
-    private Label resourseLabel;
+    private Label recipesLabel;
 
     @FXML
     private Button addButton;
@@ -42,7 +43,7 @@ public class RecipesTabController {
     private Pane rightPane;
 
     @FXML
-    public Pane resoursesVbox;
+    public Pane recipesVbox;
 
     @FXML
     private ScrollPane scrollPane;
@@ -78,8 +79,8 @@ public class RecipesTabController {
         scrollPane.prefWidthProperty().bind(rightPane.widthProperty());
         scrollPane.prefHeightProperty().bind(rightPane.heightProperty());
 
-        resoursesVbox.prefWidthProperty().bind(scrollPane.widthProperty());
-        resoursesVbox.prefHeightProperty().bind(scrollPane.heightProperty());
+        recipesVbox.prefWidthProperty().bind(scrollPane.widthProperty());
+        recipesVbox.prefHeightProperty().bind(scrollPane.heightProperty());
 
 
         labelBar.prefWidthProperty().bind(rightPane.widthProperty());
@@ -92,7 +93,7 @@ public class RecipesTabController {
         ordersTab.prefWidthProperty().bind(sideBar.widthProperty());
 
         DoubleBinding resourseLabelBind = labelBar.widthProperty().multiply(0.8);
-        resourseLabel.prefWidthProperty().bind(resourseLabelBind);
+        recipesLabel.prefWidthProperty().bind(resourseLabelBind);
 
         DoubleBinding addButtonBind = labelBar.widthProperty().multiply(0.2);
         addButton.prefWidthProperty().bind(addButtonBind);
@@ -100,11 +101,12 @@ public class RecipesTabController {
         mainPane.prefWidthProperty().bind(scene.widthProperty());
 
         recipes = Gingerbread.loadRecipes();
-        System.out.println("Init resource tab");
+        System.out.println("Init recipes tab");
         for (Recipe recipe: recipes) {
             addRecipe(recipe);
             recipe.print();
         }
+
 
     }
 
@@ -118,17 +120,28 @@ public class RecipesTabController {
     }
 
 
-
     @FXML
     public void addRecipe(Recipe recipe) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("recipe-pane.fxml"));
         HBox hBox = loader.load();
-        hBox.prefWidthProperty().bind(resoursesVbox.widthProperty());
-        hBox.prefHeightProperty().bind(resoursesVbox.heightProperty().multiply(0.1));
+        hBox.prefWidthProperty().bind(recipesVbox.widthProperty());
+        hBox.prefHeightProperty().bind(recipesVbox.heightProperty().multiply(0.1));
         Label label = (Label) hBox.lookup("#label");
         label.setText(recipe.getName());
-        resoursesVbox.getChildren().add(hBox);
+        recipesVbox.getChildren().add(hBox);
     }
+
+
+
+    @FXML
+    void addNewRecipe() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("recipe-window.fxml"));
+        Parent recipeWindow = loader.load();
+        RecipeWindowController controller = loader.getController();
+        controller.setTabController(this);
+        controller.showRecipeWindow(recipeWindow, null);
+    }
+
 
 
 

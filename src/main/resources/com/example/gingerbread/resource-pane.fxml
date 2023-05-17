@@ -20,6 +20,22 @@
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding></Label>
+      <Label fx:id="countLabel" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#changeResource" prefHeight="107.0" prefWidth="414.0" style="-fx-border-width: 3; -fx-border-color: #d4d5d6; -fx-border-radius: 6;">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+      </Label>
+      <Label fx:id="unitsLabel" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#changeResource" prefHeight="107.0" prefWidth="414.0" style="-fx-border-width: 3; -fx-border-color: #d4d5d6; -fx-border-radius: 6;">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+      </Label>
       <Button fx:id="removeButton" contentDisplay="CENTER" maxWidth="60" mnemonicParsing="false" onAction="#removeResource" prefHeight="104.0" prefWidth="187.0">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">

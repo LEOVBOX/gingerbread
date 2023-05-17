@@ -46,8 +46,6 @@ public class Application extends javafx.application.Application {
 
 
     public static void main(String[] args) {
-        Recipe newRecipe = new Recipe("new Recipe");
-        newRecipe.save();
         launch();
     }
 }
