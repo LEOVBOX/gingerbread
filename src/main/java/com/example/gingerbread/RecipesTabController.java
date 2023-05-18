@@ -119,6 +119,11 @@ public class RecipesTabController {
         application.showResourcesTab();
     }
 
+    @FXML
+    void showOrdersTab() throws IOException {
+        application.showOrdersTab();
+    }
+
 
     @FXML
     public void addRecipe(Recipe recipe) throws IOException {

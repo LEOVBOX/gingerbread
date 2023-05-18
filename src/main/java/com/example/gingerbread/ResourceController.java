@@ -88,9 +88,10 @@ public class ResourceController {
                 delResource.deleteResource("resources");
             }
             else if(recipeWindowController != null) {
+                String tableName = recipeWindowController.getRecipeName() + "_RecipeResources";
                 delResource = Gingerbread.getResourceByName(
-                        this.label.getText(), recipeWindowController.getRecipeName() + "Recipe_resources");
-                delResource.deleteResource(recipeWindowController.getRecipeName() + "Recipe_resources");
+                        this.label.getText(), tableName);
+                delResource.deleteResource(tableName);
             }
 
 
@@ -110,7 +111,7 @@ public class ResourceController {
             tableName = "resources";
         }
         else {
-            tableName = recipeWindowController.getRecipeName() + "Resources";
+            tableName = recipeWindowController.getRecipeName() + "_RecipeResources";
         }
         controller.showResourceWindow(resChangeWindow, label.getText(), tableName);
     }

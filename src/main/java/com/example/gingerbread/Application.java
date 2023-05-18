@@ -43,6 +43,19 @@ public class Application extends javafx.application.Application {
         mainStage.show();
     }
 
+    public void showOrdersTab() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("orders-tab.fxml"));
+        Parent root = fxmlLoader.load();
+        OrdersTabController controller = fxmlLoader.getController();
+        controller.setApplication(this);
+        Scene scene = root.getScene();
+        String css = getClass().getResource("resources-stage.css").toExternalForm();
+        root.getStylesheets().add(css);
+        mainStage.setTitle("Gingerbread");
+        mainStage.setScene(scene);
+        mainStage.show();
+    }
+
 
 
     public static void main(String[] args) {

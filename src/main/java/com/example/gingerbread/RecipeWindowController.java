@@ -89,7 +89,7 @@ public class RecipeWindowController {
     }
 
     public String getRecipeName() {
-        return recipeName.toString();
+        return recipeName.getText();
     }
 
     void showRecipeWindow(Parent recipeWindow, String name) throws IOException {

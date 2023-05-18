@@ -79,6 +79,32 @@ public class Gingerbread {
         return result;
     }
 
+    public static ArrayList<Order> loadOrders() {
+        Connection connection;
+        ArrayList<Order> result = new ArrayList<>();
+
+        try {
+            connection = DriverManager.getConnection("jdbc:sqlite:/Users/leonid/IdeaProjects/gingerbread/database.sqlite");
+            Statement statement = connection.createStatement();
+            String query = "SELECT id FROM main.orders";
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                Order order = new Order(id);
+                result.add(order);
+            }
+            resultSet.close();
+            connection.close();
+            for (Order order : result) {
+                order.load();
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public static int setId(String tableName)
     {
         Connection connection = null;

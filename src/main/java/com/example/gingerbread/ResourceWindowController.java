@@ -111,7 +111,7 @@ public class ResourceWindowController {
         resourceStage = new Stage();
         String css = getClass().getResource("resource_window.css").toExternalForm();
         if (name != null) {
-            resource = Gingerbread.getResourceByName(name, "resources") ;
+            resource = Gingerbread.getResourceByName(name, tableName) ;
             if (resource != null)
             {
                 nameText.setText(name);

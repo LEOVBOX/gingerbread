@@ -139,4 +139,9 @@ public class ResourceTabController {
     void openRecipesTab() throws IOException {
         application.showRecepiesTab();
     }
+
+    @FXML
+    void showOrdersTab() throws IOException {
+        application.showOrdersTab();
+    }
 }

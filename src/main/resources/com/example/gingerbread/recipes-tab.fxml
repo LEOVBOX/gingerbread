@@ -26,7 +26,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="ordersTab" prefHeight="45.0" prefWidth="156.0" text="Заказы">
+                  <Label fx:id="ordersTab" onMouseClicked="#showOrdersTab" prefHeight="45.0" prefWidth="156.0" text="Заказы">
                      <font>
                         <Font size="24.0" />
                      </font>

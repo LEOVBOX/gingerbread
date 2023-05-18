@@ -29,14 +29,14 @@
       </HBox>
       <ScrollPane id="scrollPane" fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="287.0" prefWidth="600.0" vbarPolicy="NEVER">
          <content>
-            <TextArea id="recipeDescription" fx:id="recipeDescription" prefHeight="343.0" prefWidth="598.0" promptText="Описание рецепта">
+            <TextArea id="recipeDescription" fx:id="recipeDescription" prefHeight="214.0" prefWidth="598.0" promptText="Описание рецепта">
                <font>
                   <Font size="16.0" />
                </font>
             </TextArea>
          </content>
       </ScrollPane>
-      <HBox fx:id="resourcesLabelHbox" alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
+      <HBox fx:id="resourcesLabelHbox" alignment="BOTTOM_LEFT" prefHeight="83.0" prefWidth="600.0">
          <children>
             <Label fx:id="resourcesLabel" text="Label" />
             <Button fx:id="addResorceButton" mnemonicParsing="false" onAction="#addNewResource" text="Button" />
@@ -44,7 +44,7 @@
       </HBox>
       <ScrollPane fx:id="resourcesScrollPane" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER">
          <content>
-            <VBox fx:id="resourcesVbox" prefHeight="134.0" prefWidth="597.0" />
+            <VBox fx:id="resourcesVbox" prefHeight="127.0" prefWidth="597.0" />
          </content>
       </ScrollPane>
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
