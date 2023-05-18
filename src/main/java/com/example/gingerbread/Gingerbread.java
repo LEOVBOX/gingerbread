@@ -42,8 +42,8 @@ public class Gingerbread {
         return null; // если объект не найден
     }
 
-    public static Recipe getRecipeByName(String name) {
-        ArrayList<Recipe> recipes = loadRecipes();
+    public static Recipe getRecipeByName(String name, String tableName) {
+        ArrayList<Recipe> recipes = loadRecipes(tableName);
         for (Recipe recipe : recipes) {
             if (recipe.getName().equals(name)) {
                 return recipe;
@@ -52,15 +52,25 @@ public class Gingerbread {
         return null; // если объект не найден
     }
 
+    public static Order getOrderByName(String name) {
+        ArrayList<Order> orders = loadOrders();
+        for (Order order : orders) {
+            if (order.getName().equals(name)) {
+                return order;
+            }
+        }
+        return null; // если объект не найден
+    }
 
-    public static ArrayList<Recipe> loadRecipes() {
+
+    public static ArrayList<Recipe> loadRecipes(String tableName) {
         Connection connection;
         ArrayList<Recipe> result = new ArrayList<>();
 
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:/Users/leonid/IdeaProjects/gingerbread/database.sqlite");
             Statement statement = connection.createStatement();
-            String query = "SELECT id FROM main.recipes";
+            String query = "SELECT id FROM recipes";
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");

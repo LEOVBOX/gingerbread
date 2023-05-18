@@ -50,6 +50,12 @@ public class RecipeWindowController {
     private RecipeController recipeController;
     private RecipesTabController tabController;
 
+    private OrderWindowController orderWindowController;
+
+    public void setOrderWindowController(OrderWindowController controller) {
+        orderWindowController = controller;
+    }
+
     private Scene recipeScene;
 
     private Stage recipeStage;
@@ -97,7 +103,7 @@ public class RecipeWindowController {
         recipeStage = new Stage();
         //String css = getClass().getResource("recipe_window.css").toExternalForm();
         if (name != null) {
-            recipe = Gingerbread.getRecipeByName(name) ;
+            recipe = Gingerbread.getRecipeByName(name, "recipes") ;
             if (recipe != null)
             {
                 recipeName.setText(name);

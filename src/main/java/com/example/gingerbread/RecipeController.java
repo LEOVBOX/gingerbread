@@ -23,6 +23,12 @@ public class RecipeController {
     @FXML
     Button removeButton;
 
+    private OrderWindowController orderWindowController;
+
+    public void setOrderWindowController(OrderWindowController controller) {
+        orderWindowController = controller;
+    }
+
 
 
     @FXML
@@ -61,13 +67,15 @@ public class RecipeController {
     @FXML
     void removeRecipe() throws IOException, SQLException {
         if (confirmDelete().get()) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("recipes-tab.fxml"));
-            loader.load();
-            RecipesTabController controller = loader.getController();
-            Recipe delRecipe = Gingerbread.getRecipeByName(this.label.getText());
-            delRecipe.deleteRecipe();
-            Pane pane = (Pane) hBox.getParent();
-            pane.getChildren().remove(hBox);
+            Recipe delRecipe = null;
+            if (orderWindowController == null) {
+                delRecipe = Gingerbread.getRecipeByName(this.label.getText(), "resources");
+                delRecipe.deleteRecipe();
+            }
+            else {
+                delRecipe = Gingerbread.getRecipeByName(this.label.getText(), orderWindowController.getOrderName());
+                delRecipe.deleteRecipe();
+            }
         }
     }
 

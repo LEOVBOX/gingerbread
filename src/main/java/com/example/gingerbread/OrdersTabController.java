@@ -15,7 +15,7 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class RecipesTabController {
+public class OrdersTabController {
 
     @FXML
     private Label recipesLabel;
@@ -43,7 +43,7 @@ public class RecipesTabController {
     private Pane rightPane;
 
     @FXML
-    public Pane recipesVbox;
+    public Pane ordersVbox;
 
     @FXML
     private ScrollPane scrollPane;
@@ -61,7 +61,7 @@ public class RecipesTabController {
 
     private Application application;
 
-    private ArrayList<Recipe> recipes;
+    private ArrayList<Order> orders;
 
 
     @FXML
@@ -79,8 +79,8 @@ public class RecipesTabController {
         scrollPane.prefWidthProperty().bind(rightPane.widthProperty());
         scrollPane.prefHeightProperty().bind(rightPane.heightProperty());
 
-        recipesVbox.prefWidthProperty().bind(scrollPane.widthProperty());
-        recipesVbox.prefHeightProperty().bind(scrollPane.heightProperty());
+        ordersVbox.prefWidthProperty().bind(scrollPane.widthProperty());
+        ordersVbox.prefHeightProperty().bind(scrollPane.heightProperty());
 
 
         labelBar.prefWidthProperty().bind(rightPane.widthProperty());
@@ -100,13 +100,12 @@ public class RecipesTabController {
 
         mainPane.prefWidthProperty().bind(scene.widthProperty());
 
-        recipes = Gingerbread.loadRecipes("recipes");
+        orders = Gingerbread.loadOrders();
         System.out.println("Init recipes tab");
-        for (Recipe recipe: recipes) {
-            addRecipe(recipe);
-            recipe.print();
+        for (Order order: orders) {
+            addOrder(order);
+            order.print();
         }
-
 
     }
 
@@ -120,31 +119,37 @@ public class RecipesTabController {
     }
 
     @FXML
-    void showOrdersTab() throws IOException {
-        application.showOrdersTab();
+    void showRecipesTab() throws IOException {
+        application.showRecepiesTab();
     }
 
 
     @FXML
-    public void addRecipe(Recipe recipe) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("recipe-pane.fxml"));
+    public void addOrder(Order order) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("order-pane.fxml"));
         HBox hBox = loader.load();
-        hBox.prefWidthProperty().bind(recipesVbox.widthProperty());
-        hBox.prefHeightProperty().bind(recipesVbox.heightProperty().multiply(0.1));
+        OrderController controller = loader.getController();
+        controller.setOrdersTabController(this);
+        hBox.prefWidthProperty().bind(ordersVbox.widthProperty());
+        hBox.prefHeightProperty().bind(ordersVbox.heightProperty().multiply(0.1));
         Label label = (Label) hBox.lookup("#label");
-        label.setText(recipe.getName());
-        recipesVbox.getChildren().add(hBox);
+        Label deadlineLabel = (Label) hBox.lookup("#deadlineLabel");
+        Label costLabel = (Label) hBox.lookup("#costLabel") ;
+        costLabel.setText(Double.toString(order.getCost()));
+        deadlineLabel.setText(order.getDeadline());
+        label.setText(order.getName());
+        ordersVbox.getChildren().add(hBox);
     }
 
 
 
     @FXML
-    void addNewRecipe() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("recipe-window.fxml"));
+    void addNewOrder() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("order-window.fxml"));
         Parent recipeWindow = loader.load();
-        RecipeWindowController controller = loader.getController();
+        OrderWindowController controller = loader.getController();
         controller.setTabController(this);
-        controller.showRecipeWindow(recipeWindow, null);
+        controller.showOrderWindow(recipeWindow, null);
     }
 
 

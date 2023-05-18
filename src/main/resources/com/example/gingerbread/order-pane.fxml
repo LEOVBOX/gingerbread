@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="hBox" minHeight="60.0" prefHeight="93.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gingerbread.OrderController">
+   <children>
+      <Label fx:id="label" onMouseClicked="#openOrderWindow" prefHeight="107.0" prefWidth="414.0" style="-fx-border-width: 3; -fx-border-color: #d4d5d6; -fx-border-radius: 6;">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding></Label>
+      <Label fx:id="deadlineLabel" onMouseClicked="#openDeadlineWindow" prefHeight="107.0" prefWidth="414.0" style="-fx-border-width: 3; -fx-border-color: #d4d5d6; -fx-border-radius: 6;">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+      </Label>
+      <Label fx:id="costLabel" onMouseClicked="#openOrderWindow" prefHeight="107.0" prefWidth="414.0" style="-fx-border-width: 3; -fx-border-color: #d4d5d6; -fx-border-radius: 6;">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+      </Label>
+      <Button fx:id="removeButton" contentDisplay="CENTER" maxWidth="60" mnemonicParsing="false" onAction="#removeOrder" prefHeight="104.0" prefWidth="187.0">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@close.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin></Button>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</HBox>
