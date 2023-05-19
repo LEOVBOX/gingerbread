@@ -21,7 +21,7 @@ public class OrderController {
     HBox hBox;
 
     @FXML
-    Button removeButton;
+    Button button;
 
     @FXML
     Label deadlineLabel;
@@ -41,8 +41,8 @@ public class OrderController {
         label.prefHeightProperty().bind(hBox.heightProperty());
         deadlineLabel.prefWidthProperty().bind(hBox.widthProperty().multiply(0.3));
         costLabel.prefWidthProperty().bind(hBox.widthProperty().multiply(0.3));
-        removeButton.prefWidthProperty().bind(hBox.prefWidthProperty());
-        String css = getClass().getResource("resourece_Pane.css").toExternalForm();
+        button.prefWidthProperty().bind(hBox.prefWidthProperty());
+        String css = getClass().getResource("resource_Pane.css").toExternalForm();
         hBox.getStylesheets().add(css);
 
     }
@@ -75,7 +75,6 @@ public class OrderController {
         if (confirmDelete().get()) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("orders-tab.fxml"));
             loader.load();
-            OrdersTabController controller = loader.getController();
             Order delOrder = Gingerbread.getOrderByName(this.label.getText());
             delOrder.deleteOrder();
             Pane pane = (Pane) hBox.getParent();

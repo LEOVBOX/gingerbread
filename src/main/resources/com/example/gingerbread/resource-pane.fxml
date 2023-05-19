@@ -36,7 +36,7 @@
             <Insets left="10.0" right="10.0" />
          </padding>
       </Label>
-      <Button fx:id="removeButton" contentDisplay="CENTER" maxWidth="60" mnemonicParsing="false" onAction="#removeResource" prefHeight="104.0" prefWidth="187.0">
+      <Button fx:id="button" contentDisplay="CENTER" maxWidth="60" mnemonicParsing="false" onAction="#removeResource" prefHeight="104.0" prefWidth="187.0">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>

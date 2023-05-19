@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class OrderWindowController {
@@ -71,7 +72,7 @@ public class OrderWindowController {
 
     private Order order;
 
-    private ArrayList<Recipe> recipes;
+    private ArrayList<String> recipesNames;
 
     @FXML
     void initialize() throws IOException {
@@ -111,6 +112,8 @@ public class OrderWindowController {
         orderName.prefWidthProperty().bind(titleHbox.prefWidthProperty());
 
 
+
+
     }
 
     void setOrderController(OrderController controller) {
@@ -125,6 +128,41 @@ public class OrderWindowController {
         return orderName.getText();
     }
 
+    public int getOrderRecipeCount(String tableName, String recipeName) {
+        int value = 0;
+        try {
+            // Устанавливаем соединение с базой данных
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/leonid/IdeaProjects/gingerbread/database.sqlite");
+
+            // Создаем SQL-запрос для выполнения
+            String query = "SELECT count FROM " + tableName + " WHERE recipeName = ?";
+
+            // Создаем объект PreparedStatement
+            PreparedStatement statement = conn.prepareStatement(query);
+
+            // Устанавливаем значение параметра
+            statement.setString(1, recipeName);
+
+            // Выполняем SQL-запрос
+            ResultSet resultSet = statement.executeQuery();
+
+
+            // Если результаты найдены, получаем значение
+            if (resultSet.next()) {
+                value = resultSet.getInt(1);
+            }
+
+            // Закрываем ресурсы
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return value;
+    }
+
     void showOrderWindow(Parent orderWindow, String name) throws IOException {
         orderScene = orderWindow.getScene();
         orderStage = new Stage();
@@ -136,12 +174,13 @@ public class OrderWindowController {
                 orderName.setText(name);
                 orderDescription.setText(order.getDescription());
                 deadlineTextField.setText(order.getDeadline());
-                recipes = Gingerbread.loadRecipes("recipes");
+                recipesNames = Gingerbread.loadOrderRecipes(name + "_OrdersRecipes");
                 System.out.println("Init resources");
-                for (Recipe recipe: recipes) {
-                    addRecipe(recipe);
-                    recipe.print();
+                for (String recipe: recipesNames) {
+                    getOrderRecipeCount(name + "_OrdersRecipes", recipe);
+                    addRecipe(Gingerbread.getRecipeByName(recipe), 1);
                 }
+
                 // Добавить загрузку картинки в ImageView
             }
         }
@@ -180,8 +219,8 @@ public class OrderWindowController {
     }
 
 
-    public void addRecipe(Recipe recipe) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("recipe-pane.fxml"));
+    public void addRecipe(Recipe recipe, int count) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("recipe-pane-choice.fxml"));
         HBox hBox = loader.load();
         RecipeController controller = loader.getController();
         controller.setOrderWindowController(this);
@@ -189,6 +228,8 @@ public class OrderWindowController {
         hBox.prefHeightProperty().bind(recipesVbox.heightProperty().multiply(0.1));
         Label label = (Label) hBox.lookup("#label");
         label.setText(recipe.getName());
+        Label countLabel = (Label) hBox.lookup("#countLabel");
+        countLabel.setText(Integer.toString(count));
         recipesVbox.getChildren().add(hBox);
     }
 

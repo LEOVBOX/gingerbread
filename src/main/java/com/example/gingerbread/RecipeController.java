@@ -21,7 +21,7 @@ public class RecipeController {
     HBox hBox;
 
     @FXML
-    Button removeButton;
+    Button button;
 
     private OrderWindowController orderWindowController;
 
@@ -29,14 +29,16 @@ public class RecipeController {
         orderWindowController = controller;
     }
 
-
+    public OrderWindowController getOrderWindowController() {
+        return orderWindowController;
+    }
 
     @FXML
     void initialize() {
         label.prefWidthProperty().bind(hBox.widthProperty());
         label.prefHeightProperty().bind(hBox.heightProperty());
-        removeButton.prefWidthProperty().bind(hBox.prefWidthProperty());
-        String css = getClass().getResource("resourece_Pane.css").toExternalForm();
+        button.prefWidthProperty().bind(hBox.prefWidthProperty());
+        String css = getClass().getResource("resource_Pane.css").toExternalForm();
         hBox.getStylesheets().add(css);
 
     }
@@ -69,11 +71,7 @@ public class RecipeController {
         if (confirmDelete().get()) {
             Recipe delRecipe = null;
             if (orderWindowController == null) {
-                delRecipe = Gingerbread.getRecipeByName(this.label.getText(), "resources");
-                delRecipe.deleteRecipe();
-            }
-            else {
-                delRecipe = Gingerbread.getRecipeByName(this.label.getText(), orderWindowController.getOrderName());
+                delRecipe = Gingerbread.getRecipeByName(this.label.getText());
                 delRecipe.deleteRecipe();
             }
         }

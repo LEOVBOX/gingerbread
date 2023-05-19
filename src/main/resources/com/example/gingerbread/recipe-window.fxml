@@ -36,10 +36,16 @@
             </TextArea>
          </content>
       </ScrollPane>
-      <HBox fx:id="resourcesLabelHbox" alignment="BOTTOM_LEFT" prefHeight="83.0" prefWidth="600.0">
+      <HBox fx:id="resourcesLabelHbox" alignment="CENTER" prefHeight="83.0" prefWidth="600.0" spacing="10.0">
          <children>
-            <Label fx:id="resourcesLabel" text="Label" />
-            <Button fx:id="addResorceButton" mnemonicParsing="false" onAction="#addNewResource" text="Button" />
+            <Label fx:id="resourcesLabel" text="Ресурсы">
+               <font>
+                  <Font size="23.0" />
+               </font></Label>
+            <Button fx:id="addResorceButton" mnemonicParsing="false" onAction="#addNewResource" text="+">
+               <font>
+                  <Font size="17.0" />
+               </font></Button>
          </children>
       </HBox>
       <ScrollPane fx:id="resourcesScrollPane" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER">

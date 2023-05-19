@@ -1,4 +1,4 @@
-#removeButton {
+#button {
     -fx-background-color: rgba(242, 75, 75, 0.5);
     -fx-text-fill: #fff;
     -fx-font-family: "Roboto", sans-serif;
@@ -9,7 +9,7 @@
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.2) , 2,0,0,1 );
 }
 
-#removeButton:hover {
+#button:hover {
     -fx-background-color: rgba(242, 75, 75, 1);
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.4) , 4,0,0,2 );
 }

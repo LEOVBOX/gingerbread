@@ -100,7 +100,7 @@ public class RecipesTabController {
 
         mainPane.prefWidthProperty().bind(scene.widthProperty());
 
-        recipes = Gingerbread.loadRecipes("recipes");
+        recipes = Gingerbread.loadRecipes();
         System.out.println("Init recipes tab");
         for (Recipe recipe: recipes) {
             addRecipe(recipe);

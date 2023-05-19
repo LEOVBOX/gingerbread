@@ -21,7 +21,7 @@ public class ResourceController {
     HBox hBox;
 
     @FXML
-    Button removeButton;
+    Button button;
 
     @FXML
     Label countLabel;
@@ -48,8 +48,8 @@ public class ResourceController {
         unitsLabel.prefWidthProperty().bind(hBox.prefWidthProperty().multiply(0.2));
         label.prefWidthProperty().bind(hBox.widthProperty().multiply(0.6));
         label.prefHeightProperty().bind(hBox.heightProperty());
-        removeButton.prefWidthProperty().bind(hBox.prefWidthProperty());
-        String css = getClass().getResource("resourece_Pane.css").toExternalForm();
+        button.prefWidthProperty().bind(hBox.prefWidthProperty());
+        String css = getClass().getResource("resource_Pane.css").toExternalForm();
         hBox.getStylesheets().add(css);
 
     }

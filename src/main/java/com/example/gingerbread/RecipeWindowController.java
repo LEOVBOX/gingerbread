@@ -103,15 +103,13 @@ public class RecipeWindowController {
         recipeStage = new Stage();
         //String css = getClass().getResource("recipe_window.css").toExternalForm();
         if (name != null) {
-            recipe = Gingerbread.getRecipeByName(name, "recipes") ;
+            recipe = Gingerbread.getRecipeByName(name) ;
             if (recipe != null)
             {
                 recipeName.setText(name);
                 recipeDescription.setText(recipe.getDescription());
                 // Добавить загрузку картинки в ImageView
             }
-        }
-        if (name != null) {
             resources = Gingerbread.loadResources(recipeName.getText() + "_RecipeResources");
             System.out.println("Init resources");
             for (Resource res: resources) {
