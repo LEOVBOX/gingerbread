@@ -74,7 +74,12 @@ public class RecipeController {
                 delRecipe = Gingerbread.getRecipeByName(this.label.getText());
                 delRecipe.deleteRecipe();
             }
+
+            Pane pane = (Pane) hBox.getParent();
+            pane.getChildren().remove(hBox);
         }
+
+
     }
 
     @FXML

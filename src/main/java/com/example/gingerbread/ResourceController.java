@@ -82,8 +82,6 @@ public class ResourceController {
         if (confirmDelete().get()) {
             Resource delResource = null;
             if (resourceTabController != null) {
-//                FXMLLoader loader = new FXMLLoader(getClass().getResource("resources-tab.fxml"));
-//                loader.load();
                 delResource = Gingerbread.getResourceByName(this.label.getText(), "resources");
                 delResource.deleteResource("resources");
             }
