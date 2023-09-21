@@ -11,18 +11,29 @@ import java.sql.SQLException;
 public class ChoiceRecipeController extends RecipeController{
     private RecipeChoiceWindowController recipeChoiceWindowController;
 
+    private OrderWindowController orderWindowController;
+
+    public void setOrderWindowController(OrderWindowController controller) {
+        orderWindowController = controller;
+    }
+
+    public OrderWindowController getOrderWindowController() {
+        return orderWindowController;
+    }
+
     public void setRecipeChoiceWindowController(RecipeChoiceWindowController controller) {
         this.recipeChoiceWindowController = controller;
     }
 
     @FXML
     void onButtonClick() throws SQLException, IOException {
-        if (recipeChoiceWindowController != null) {
-            // Увеличиваем количество рецептов \ добавляем рецепт в заказ
-        }
-        else {
-            this.removeRecipe();
-        }
+
+//        if (recipeChoiceWindowController != null) {
+//            // Увеличиваем количество рецептов \ добавляем рецепт в заказ
+//        }
+//        else {
+//            this.removeRecipe();
+//        }
     }
 
     void addOrdersRecipe(String recipeName) throws SQLException {
@@ -35,7 +46,7 @@ public class ChoiceRecipeController extends RecipeController{
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:/Users/leonid/IdeaProjects/gingerbread/database.sqlite");
             String tableName = getOrderWindowController().getOrderName() + "_OrdersRecipes";
-            String sql = "DELETE FROM " + tableName + "_OrdersRecipes WHERE recipeName = ?";
+            String sql = "DELETE FROM " + tableName + " WHERE recipeName = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, recipeName);
             pstmt.executeUpdate();

@@ -49,7 +49,7 @@ public class Resource {
     }
 
 
-
+    // TODO Исправить создание новой таблицы ресурсов рецепта если имя рецепта с пробелами
     public void save(String tableName) {
         Connection connection = null;
         try {

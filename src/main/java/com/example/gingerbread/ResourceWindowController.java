@@ -90,7 +90,7 @@ public class ResourceWindowController {
         Stage stage = (Stage) mainPane.getScene().getWindow();
         stage.close();
         if (tabController != null) {
-            tabController.addResourse(resource);
+            tabController.loadResourсe(resource);
         }
         else if (recipeWindowController != null) {
             recipeWindowController.addResource(resource);

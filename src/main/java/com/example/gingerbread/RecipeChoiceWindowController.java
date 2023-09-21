@@ -67,6 +67,9 @@ public class RecipeChoiceWindowController {
         String css = getClass().getResource("recipe_pane_choice.css").toExternalForm();
         hBox.getStylesheets().add(css);
 
+        ChoiceRecipeController controller = loader.getController();
+        controller.setOrderWindowController(this.orderWindowController);
+
         hBox.prefWidthProperty().bind(recipesVbox.widthProperty());
         hBox.prefHeightProperty().bind(recipesVbox.heightProperty().multiply(0.1));
         Label label = (Label) hBox.lookup("#label");

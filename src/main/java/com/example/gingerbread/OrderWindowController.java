@@ -72,7 +72,7 @@ public class OrderWindowController {
 
     private Order order;
 
-    private ArrayList<String> recipesNames;
+    private ArrayList<OrdersRecipe> recipes;
 
     @FXML
     void initialize() throws IOException {
@@ -174,11 +174,11 @@ public class OrderWindowController {
                 orderName.setText(name);
                 orderDescription.setText(order.getDescription());
                 deadlineTextField.setText(order.getDeadline());
-                recipesNames = Gingerbread.loadOrderRecipes(name + "_OrdersRecipes");
-                System.out.println("Init resources");
-                for (String recipe: recipesNames) {
-                    getOrderRecipeCount(name + "_OrdersRecipes", recipe);
-                    addRecipe(Gingerbread.getRecipeByName(recipe), 1);
+                recipes = Gingerbread.loadOrderRecipes(name + "_OrdersRecipes");
+                System.out.println("Init recipes");
+                for (OrdersRecipe recipe: recipes) {
+                    getOrderRecipeCount(name + "_OrdersRecipes", recipe.getName());
+                    addRecipe(Gingerbread.getRecipeByName(recipe.getName()), recipe.getCount());
                 }
 
                 // Добавить загрузку картинки в ImageView
@@ -210,7 +210,7 @@ public class OrderWindowController {
 
         if (tabController != null)
         {
-            tabController.addOrder(order);
+            tabController.loadResource(order);
         }
         else if (orderController != null)
         {

@@ -39,7 +39,7 @@
                <children>
                   <HBox fx:id="labelBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #b1f0f0;">
                      <children>
-                        <Label fx:id="recipesLabel" prefHeight="51.0" prefWidth="363.0" style="-fx-background-color: #e6e6e6;" text="Заказы">
+                        <Label fx:id="tabLabel" prefHeight="51.0" prefWidth="363.0" style="-fx-background-color: #e6e6e6;" text="Заказы">
                            <font>
                               <Font size="27.0" />
                            </font>
@@ -56,7 +56,7 @@
                   </HBox>
                   <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="346.0" prefWidth="450.0" vbarPolicy="NEVER">
                      <content>
-                        <VBox fx:id="ordersVbox" prefHeight="344.0" prefWidth="450.0" spacing="5.0">
+                        <VBox fx:id="contentVbox" prefHeight="344.0" prefWidth="450.0" spacing="5.0">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>

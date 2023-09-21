@@ -30,26 +30,13 @@ public class Application extends javafx.application.Application {
         mainStage.show();
     }
 
-    public void showRecepiesTab() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("recipes-tab.fxml"));
+    public void showTab(String fxmlPath, String cssPath) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(fxmlPath));
         Parent root = fxmlLoader.load();
-        RecipesTabController controller = fxmlLoader.getController();
+        TabController controller = fxmlLoader.getController();
         controller.setApplication(this);
         Scene scene = root.getScene();
-        String css = getClass().getResource("resources-stage.css").toExternalForm();
-        root.getStylesheets().add(css);
-        mainStage.setTitle("Gingerbread");
-        mainStage.setScene(scene);
-        mainStage.show();
-    }
-
-    public void showOrdersTab() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("orders-tab.fxml"));
-        Parent root = fxmlLoader.load();
-        OrdersTabController controller = fxmlLoader.getController();
-        controller.setApplication(this);
-        Scene scene = root.getScene();
-        String css = getClass().getResource("resources-stage.css").toExternalForm();
+        String css = getClass().getResource(cssPath).toExternalForm();
         root.getStylesheets().add(css);
         mainStage.setTitle("Gingerbread");
         mainStage.setScene(scene);

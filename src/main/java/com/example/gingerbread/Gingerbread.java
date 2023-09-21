@@ -4,6 +4,17 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Gingerbread {
+
+    /* TODO исправить баг: при создании нового рецепта,
+        если название нового рецепта больше одного слова, то
+        название таблицы создваемой для ингридиентов данного рецепта
+        вмещает только последнее слово.
+     */
+
+    /*
+        TODO сделать создание таблицы рецептов, если не существует
+        TODO сделать создание таблицы заказов, если не существует
+     */
     public static ArrayList<Resource> loadResources(String tableName) {
         Connection connection;
         ArrayList<Resource> result = new ArrayList<>();
@@ -65,12 +76,13 @@ public class Gingerbread {
 
     public static ArrayList<Recipe> loadRecipes() {
         Connection connection;
+        String tableName = "recipes";
         ArrayList<Recipe> result = new ArrayList<>();
 
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:/Users/leonid/IdeaProjects/gingerbread/database.sqlite");
             Statement statement = connection.createStatement();
-            String query = "SELECT id FROM recipes";
+            String query = "SELECT id FROM " + tableName;
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
@@ -91,12 +103,13 @@ public class Gingerbread {
 
     public static ArrayList<Order> loadOrders() {
         Connection connection;
+        String tableName = "orders";
         ArrayList<Order> result = new ArrayList<>();
 
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:/Users/leonid/IdeaProjects/gingerbread/database.sqlite");
             Statement statement = connection.createStatement();
-            String query = "SELECT id FROM main.orders";
+            String query = "SELECT id FROM " + tableName;
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
@@ -152,9 +165,9 @@ public class Gingerbread {
         return false;
     }
 
-    public static ArrayList<String> loadOrderRecipes (String tableName) {
+    public static ArrayList<OrdersRecipe> loadOrderRecipes (String tableName) {
         Connection connection;
-        ArrayList<String> result = new ArrayList<>();
+        ArrayList<OrdersRecipe> result = new ArrayList<>();
 
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:/Users/leonid/IdeaProjects/gingerbread/database.sqlite");
@@ -163,7 +176,9 @@ public class Gingerbread {
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 String recipeName = resultSet.getString("recipeName");
-                result.add(recipeName);
+                int count = resultSet.getInt("count");
+                OrdersRecipe curRecipe = new OrdersRecipe(recipeName, count);
+                result.add(curRecipe);
             }
             resultSet.close();
             connection.close();
